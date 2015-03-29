@@ -53,6 +53,15 @@ void Node::insert_node(Tree *t)
     }
 }
 
+void print_offset(FILE* stream, int offset)
+{
+    int i;
+    for (i = 0; i < offset; ++i)
+    {
+        fprintf(stream, " ");
+    }
+}
+
 #if 1
 void Node::print_node(ofstream &file)
 {
@@ -93,12 +102,16 @@ Tree::Tree()
 
 void Tree::print_tree()
 {
+#ifdef ENABLE_GRAPH_OPERATIONS
     ofstream file;
     file.open("tree.gv",ios::app);
     file<<"digraph BST {"<<endl;
+#endif
     root->print_node(file);
+#ifdef ENABLE_GRAPH_OPERATIONS
     file<<"}";
     file.close();
+#endif
 }
 
 Node * Node::delete_node(int data)

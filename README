@@ -1,0 +1,11 @@
+This is implementation of Simple Binary Search Tree.
+
+Run make to generate the test binary which is generated at bin/ in the project
+root folder.
+
+Before running make run the build.sh to select the tree insert/delete and viewing
+options.
+
+After the build is complete, run
+$bin/bst
+$dot -Tps tree.gv -o graph1.ps ; evince graph1.ps  &
