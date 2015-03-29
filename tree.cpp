@@ -105,12 +105,11 @@ Node * Node::delete_node(int data)
 {
     Node *cur_node = this;
     Node *root = this;
-    Node *prev_node;
+    Node *prev_node = nullptr;
     Node *match_node;
 
     while(nullptr != cur_node)
     {
-        prev_node = cur_node;
         if(data == cur_node->data)
         {
             match_node = cur_node;
@@ -140,39 +139,52 @@ Node * Node::delete_node(int data)
             }
             else if(nullptr == cur_node->left)
             {
-                cur_node = cur_node->right;
-
-                prev_node = cur_node;
-                while(nullptr != cur_node)
+                cur_node->right->parent = prev_node;
+                if(nullptr != prev_node)
                 {
-                    prev_node = cur_node;
-                    cur_node = cur_node->left;
-                }
-
-                match_node->data = prev_node->data;
-
-                if(nullptr != prev_node->right)
-                {
-                    /* Case where match_node is same as
-                     * prev_node->parent->right */
-                    prev_node->parent->right = prev_node->right;
-                    prev_node->right->parent = prev_node->parent;
-                }
-                else if(prev_node == prev_node->parent->left)
-                {
-                    prev_node->parent->left = nullptr;
+                    if(cur_node == prev_node->left)
+                    {
+                        prev_node->left = cur_node->right;
+                    }
+                    else
+                    {
+                        prev_node->right = cur_node->right;
+                    }
+                    delete(cur_node);
                 }
                 else
                 {
-                    prev_node->parent->right = nullptr;
+                    Node * new_root = cur_node->right;
+                    delete(cur_node);
+                    return new_root;
                 }
-                delete(prev_node);
-                prev_node = nullptr;
+            }
+            else if(nullptr == cur_node->right)
+            {
+                cur_node->left->parent = prev_node;
+                if(nullptr != prev_node)
+                {
+                    if(cur_node == prev_node->left)
+                    {
+                        prev_node->left = cur_node->left;
+                    }
+                    else
+                    {
+                        prev_node->right = cur_node->left;
+                    }
+                    delete(cur_node);
+                }
+                else
+                {
+                    Node * new_root = cur_node->left;
+                    delete(cur_node);
+                    return new_root;
+                }
             }
             else
             {
-                cur_node = cur_node->left;
                 prev_node = cur_node;
+                cur_node = cur_node->left;
                 while(nullptr != cur_node)
                 {
                     prev_node = cur_node;
@@ -180,19 +192,17 @@ Node * Node::delete_node(int data)
                 }
 
                 match_node->data = prev_node->data;
-
-                if(nullptr != prev_node->left)
+                if(prev_node == prev_node->parent->left)
                 {
                     prev_node->parent->left = prev_node->left;
-                    prev_node->left->parent = prev_node->parent;
-                }
-                else if(prev_node == prev_node->parent->left)
-                {
-                    prev_node->parent->left = nullptr;
                 }
                 else
                 {
-                    prev_node->parent->right = nullptr;
+                    prev_node->parent->right = prev_node->left;
+                }
+                if(nullptr != prev_node->left)
+                {
+                    prev_node->left->parent = prev_node->parent;
                 }
                 delete(prev_node);
                 prev_node = nullptr;
@@ -200,10 +210,12 @@ Node * Node::delete_node(int data)
         }
         else if(data < cur_node->data)
         {
+            prev_node = cur_node;
             cur_node = cur_node->left;
         }
         else
         {
+            prev_node = cur_node;
             cur_node = cur_node->right;
         }
     }
