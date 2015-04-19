@@ -6,23 +6,24 @@ int main()
     int choice;
 #ifndef ENABLE_RANDOM_OPERATIONS
     Node * input_node;
+    Node * output_node;
     int input_data;
 #endif
 
     while(1)
     {
 #ifndef ENABLE_RANDOM_OPERATIONS
-    cout<<"Choices : 1. Insert 2. Delete 4. Print 5. Exit"<<endl;
+    cout<<"Choices : 1. Insert 2. Delete 5. Print 6. Exit"<<endl;
 #else
-    cout<<"Choices : 1. Insert 2. Delete 3. Left Rotate 4. Print 5. Exit"<<endl;
+    cout<<"Choices : 1. Insert 2. Delete 3. Left Rotate 4. Right Rotate 5. Print 6. Exit"<<endl;
 #endif
         cin>>choice;
 
-        switch(choice)
+        switch(static_cast<Operations>(choice))
         {
-            case 1:
+            case Operations::INSERT:
 #ifndef ENABLE_RANDOM_OPERATIONS
-                cout<<"Enter the data to be inserted: "
+                cout<<"Enter the data to be inserted: ";
                 cin>>input_data;
                 input_node = new Node(input_data);
                 input_node->insert_node(&bst);
@@ -30,27 +31,61 @@ int main()
                 bst.insert_into_tree();
 #endif
                 break;
-            case 2:
+            case Operations::DELETE:
 #ifndef ENABLE_RANDOM_OPERATIONS
-                cout<<"Enter the data to be deleted: "
+                cout<<"Enter the data to be deleted: ";
                 cin>>input_data;
-                bst.get_root()->find_node(input_data)->delete_node(&bst);
+                output_node = bst.get_root()->find_node(input_data);
+                if(nullptr == output_node)
+                {
+                    cout<<"Data entered doesn't exist in the tree "<<endl;
+                }
+                else
+                {
+                    output_node->delete_node(&bst);
+                }
 #else
                 bst.delete_from_tree();
 #endif
                 break;
-            case 3:
+            case Operations::LEFT_ROTATE:
 #ifndef ENABLE_RANDOM_OPERATIONS
+                cout<<"Enter the data to be rotated to the left: ";
                 cin>>input_data;
-                bst.get_root()->find_node(input_data)->left_rotate_node(&bst);
+                output_node = bst.get_root()->find_node(input_data);
+                if(nullptr == output_node)
+                {
+                    cout<<"Data entered doesn't exist in the tree "<<endl;
+                }
+                else
+                {
+                    output_node->left_rotate_node(&bst);
+                }
 #else
                 cout<<"Not supported in random operations mode !!";
 #endif
                 break;
-            case 4:
+            case Operations::RIGHT_ROTATE:
+#ifndef ENABLE_RANDOM_OPERATIONS
+                cout<<"Enter the data to be rotated to the right: ";
+                cin>>input_data;
+                output_node = bst.get_root()->find_node(input_data);
+                if(nullptr == output_node)
+                {
+                    cout<<"Data entered doesn't exist in the tree."<<endl;
+                }
+                else
+                {
+                    output_node->right_rotate_node(&bst);
+                }
+#else
+                cout<<"Not supported in random operations mode !!";
+#endif
+                break;
+            case Operations::PRINT:
                 bst.print_tree();
                 break;
-            case 5:
+            case Operations::EXIT:
                 exit(0);
             default:
                 cout<<"More cases coming soon"<<endl;

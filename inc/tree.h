@@ -1,45 +1,16 @@
+#ifndef TREE_H
+#define TREE_H
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <list>
 #include <time.h>
 #include <algorithm>
+#include "node.h"
 
 using namespace std;
 
-class Tree;
-
-class Node
-{
-    private:
-        int data;
-        Node *left;
-        Node *right;
-        Node *parent;
-    public:
-        Node();
-        Node(int data);
-        /*
-         * Function for printing a nodes's data.
-         * */
-        void print_node(ofstream &file);
-        /*
-         * Finding the node in the tree given the data.
-         * */
-        Node * find_node(int data);
-        /*
-         * Function for inserting a node in Tree.
-         * */
-        void insert_node(Tree *t);
-        /*
-         * Rotate the node with which this function is called.
-         * */
-        void left_rotate_node(Tree *t);
-        /*
-         * Delete the calling node
-         * */
-        void delete_node(Tree *t);
-};
+//class Node;
 
 class Tree
 {
@@ -70,3 +41,32 @@ class Tree
         void print_tree();
 };
 
+enum class Operations
+{
+    /*
+     * Insert.
+     * */
+    INSERT=1,
+    /*
+     * Delete.
+     * */
+    DELETE,
+    /*
+     * Left Rotate.
+     * */
+    LEFT_ROTATE,
+    /*
+     * Right Rotate.
+     * */
+    RIGHT_ROTATE,
+    /*
+     * Print.
+     * */
+    PRINT,
+    /*
+     * Exit.
+     * */
+    EXIT
+};
+
+#endif

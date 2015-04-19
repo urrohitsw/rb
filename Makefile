@@ -8,10 +8,10 @@ CPP = g++
 CPP_INCLUDES = -I$(INC_DIR)
 CPP_FLAGS = -Wall -std=c++11 -g $(DEFS)
 
-HEADER_FILES = tree.h
+HEADER_FILES = tree.h node.h
 HEADERS = $(patsubst %,$(INC_DIR)/%,$(HEADER_FILES))
 
-OBJECT_FILES = tree.o main.o
+OBJECT_FILES = tree.o main.o node.o
 OBJECTS = $(patsubst %,$(OBJ_DIR)/%,$(OBJECT_FILES))
 
 ifeq ($(ENABLE_RANDOM_OPERATIONS), true)
