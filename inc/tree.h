@@ -20,12 +20,24 @@ class Node
         Node();
         Node(int data);
         /*
-         * Function for printing a nodes's data
+         * Function for printing a nodes's data.
          * */
         void print_node(ofstream &file);
+        /*
+         * Finding the node in the tree given the data.
+         * */
         Node * find_node(int data);
+        /*
+         * Function for inserting a node in Tree.
+         * */
         void insert_node(Tree *t);
+        /*
+         * Rotate the node with which this function is called.
+         * */
         void left_rotate_node(Tree *t);
+        /*
+         * Delete the calling node
+         * */
         void delete_node(Tree *t);
 };
 
