@@ -19,14 +19,19 @@ class Node
     public:
         Node();
         Node(int data);
+        /*
+         * Function for printing a nodes's data
+         * */
         void print_node(ofstream &file);
+        Node * find_node(int data);
         void insert_node(Tree *t);
-        Node * delete_node(int data);
+        void left_rotate_node(Tree *t);
+        void delete_node(Tree *t);
 };
 
 class Tree
 {
-    private:
+    protected:
         Node * root;
         list<int> treedata;
     public:

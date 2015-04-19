@@ -53,6 +53,57 @@ void Node::insert_node(Tree *t)
     }
 }
 
+Node * Node::find_node(int data)
+{
+    Node *cur_node = this;
+
+    while(nullptr != cur_node)
+    {
+        if(data == cur_node->data)
+        {
+            return cur_node;
+        }
+        else if(data < cur_node->data)
+        {
+            cur_node = cur_node->left;
+        }
+        else
+        {
+            cur_node = cur_node->right;
+        }
+    }
+    return cur_node;
+}
+
+void Node::left_rotate_node(Tree *t)
+{
+    Node *cur_node = this;
+
+    Node * new_parent = cur_node->right;
+    cur_node->right = new_parent->left;
+
+    if(nullptr != new_parent->left)
+    {
+        new_parent->left->parent = cur_node;
+    }
+    new_parent->parent = cur_node->parent;
+
+    if(t->get_root() == cur_node)
+    {
+        t->set_root(new_parent);
+    }
+    else if(cur_node == cur_node->parent->left)
+    {
+        cur_node->parent->left = new_parent;
+    }
+    else
+    {
+        cur_node->parent->right = new_parent;
+    }
+    new_parent->left = cur_node;
+    cur_node->parent = new_parent;
+}
+
 void print_offset(FILE* stream, int offset)
 {
     int i;
@@ -114,125 +165,103 @@ void Tree::print_tree()
 #endif
 }
 
-Node * Node::delete_node(int data)
+void Node::delete_node(Tree *t)
 {
+    Node *prev_node = this->parent;
+    Node *match_node = this;
     Node *cur_node = this;
-    Node *root = this;
-    Node *prev_node = nullptr;
-    Node *match_node;
 
-    while(nullptr != cur_node)
+    if(nullptr == cur_node->left &&
+            nullptr == cur_node->right)
     {
-        if(data == cur_node->data)
+        if(cur_node == cur_node->parent->left)
         {
-            match_node = cur_node;
-            if(nullptr == cur_node->left &&
-                    nullptr == cur_node->right)
-            {
-                if(cur_node == cur_node->parent->left)
-                {
-                    cur_node->parent->left = nullptr;
-                }
-                else
-                {
-                    cur_node->parent->right = nullptr;
-                }
+            cur_node->parent->left = nullptr;
+        }
+        else
+        {
+            cur_node->parent->right = nullptr;
+        }
 
-                if(root == cur_node)
-                {
-                    delete(cur_node);
-                    cur_node = nullptr;
-                    return nullptr;
-                }
-                else
-                {
-                    delete(cur_node);
-                    cur_node = nullptr;
-                }
-            }
-            else if(nullptr == cur_node->left)
+        if(t->get_root() == cur_node)
+        {
+            delete(cur_node);
+            t->set_root(nullptr);
+        }
+        else
+        {
+            delete(cur_node);
+            cur_node = nullptr;
+        }
+    }
+    else if(nullptr == cur_node->left)
+    {
+        cur_node->right->parent = prev_node;
+        if(nullptr != prev_node)
+        {
+            if(cur_node == prev_node->left)
             {
-                cur_node->right->parent = prev_node;
-                if(nullptr != prev_node)
-                {
-                    if(cur_node == prev_node->left)
-                    {
-                        prev_node->left = cur_node->right;
-                    }
-                    else
-                    {
-                        prev_node->right = cur_node->right;
-                    }
-                    delete(cur_node);
-                }
-                else
-                {
-                    Node * new_root = cur_node->right;
-                    delete(cur_node);
-                    return new_root;
-                }
-            }
-            else if(nullptr == cur_node->right)
-            {
-                cur_node->left->parent = prev_node;
-                if(nullptr != prev_node)
-                {
-                    if(cur_node == prev_node->left)
-                    {
-                        prev_node->left = cur_node->left;
-                    }
-                    else
-                    {
-                        prev_node->right = cur_node->left;
-                    }
-                    delete(cur_node);
-                }
-                else
-                {
-                    Node * new_root = cur_node->left;
-                    delete(cur_node);
-                    return new_root;
-                }
+                prev_node->left = cur_node->right;
             }
             else
             {
-                prev_node = cur_node;
-                cur_node = cur_node->left;
-                while(nullptr != cur_node)
-                {
-                    prev_node = cur_node;
-                    cur_node = cur_node->right;
-                }
-
-                match_node->data = prev_node->data;
-                if(prev_node == prev_node->parent->left)
-                {
-                    prev_node->parent->left = prev_node->left;
-                }
-                else
-                {
-                    prev_node->parent->right = prev_node->left;
-                }
-                if(nullptr != prev_node->left)
-                {
-                    prev_node->left->parent = prev_node->parent;
-                }
-                delete(prev_node);
-                prev_node = nullptr;
+                prev_node->right = cur_node->right;
             }
-        }
-        else if(data < cur_node->data)
-        {
-            prev_node = cur_node;
-            cur_node = cur_node->left;
+            delete(cur_node);
         }
         else
+        {
+            t->set_root(cur_node->right);
+            delete(cur_node);
+        }
+    }
+    else if(nullptr == cur_node->right)
+    {
+        cur_node->left->parent = prev_node;
+        if(nullptr != prev_node)
+        {
+            if(cur_node == prev_node->left)
+            {
+                prev_node->left = cur_node->left;
+            }
+            else
+            {
+                prev_node->right = cur_node->left;
+            }
+            delete(cur_node);
+        }
+        else
+        {
+            t->set_root(cur_node->left);
+            delete(cur_node);
+        }
+    }
+    else
+    {
+        prev_node = cur_node;
+        cur_node = cur_node->left;
+        while(nullptr != cur_node)
         {
             prev_node = cur_node;
             cur_node = cur_node->right;
         }
+
+        match_node->data = prev_node->data;
+        if(prev_node == prev_node->parent->left)
+        {
+            prev_node->parent->left = prev_node->left;
+        }
+        else
+        {
+            prev_node->parent->right = prev_node->left;
+        }
+        if(nullptr != prev_node->left)
+        {
+            prev_node->left->parent = prev_node->parent;
+        }
+        delete(prev_node);
+        prev_node = nullptr;
     }
-    return root;
 }
 
 void Tree::delete_from_tree()
@@ -251,7 +280,7 @@ void Tree::delete_from_tree()
         treedata.pop_front();
         cout<<"Deleting "<<delete_data<<endl;
 
-        root->delete_node(delete_data);
+        root->find_node(delete_data)->delete_node(this);
         print_tree();
     }
     cout<<"Deleted "<<entry_count<<" entries from the BST."<<endl;
