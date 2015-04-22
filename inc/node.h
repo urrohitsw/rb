@@ -12,7 +12,7 @@ class Tree;
 
 class Node
 {
-    private:
+    protected:
         int data;
         Node *left;
         Node *right;

@@ -6,12 +6,12 @@ BIN = bst
 
 CPP = g++
 CPP_INCLUDES = -I$(INC_DIR)
-CPP_FLAGS = -Wall -std=c++11 -g $(DEFS)
+CPP_FLAGS = -Wall  -g $(DEFS)
 
-HEADER_FILES = tree.h node.h
+HEADER_FILES = tree.h node.h rbtree.h rbnode.h
 HEADERS = $(patsubst %,$(INC_DIR)/%,$(HEADER_FILES))
 
-OBJECT_FILES = tree.o main.o node.o
+OBJECT_FILES = tree.o main.o node.o rbtree.o rbnode.o
 OBJECTS = $(patsubst %,$(OBJ_DIR)/%,$(OBJECT_FILES))
 
 ifeq ($(ENABLE_RANDOM_OPERATIONS), true)
@@ -21,6 +21,8 @@ endif
 ifeq ($(ENABLE_GRAPH_OPERATIONS), true)
 DEFS += -DENABLE_GRAPH_OPERATIONS
 endif
+
+DEFS += -std=c++11
 
 all : init $(BIN_DIR)/$(BIN)
 
