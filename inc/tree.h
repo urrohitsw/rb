@@ -41,7 +41,7 @@ class Tree
         void print_tree();
 };
 
-enum class Operations
+enum Operations
 {
     /*
      * Insert.

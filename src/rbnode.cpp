@@ -3,26 +3,26 @@
 
 RBNode::RBNode():Node()
 {
-    this->color = Color::RED;
-    this->left = nullptr;
-    this->right = nullptr;
-    this->parent = nullptr;
+    this->color = RED;
+    this->left = NULL;
+    this->right = NULL;
+    this->parent = NULL;
 }
 
 RBNode::RBNode(int data):Node(data)
 {
-    this->color = Color::RED;
-    this->left = nullptr;
-    this->right = nullptr;
-    this->parent = nullptr;
+    this->color = RED;
+    this->left = NULL;
+    this->right = NULL;
+    this->parent = NULL;
 }
 
 RBNode::RBNode(int data,Color color):Node(data)
 {
     this->color = color;
-    this->left = nullptr;
-    this->right = nullptr;
-    this->parent = nullptr;
+    this->left = NULL;
+    this->right = NULL;
+    this->parent = NULL;
 }
 
 void RBNode::insert_fixup(RBTree *rbt)
@@ -30,17 +30,17 @@ void RBNode::insert_fixup(RBTree *rbt)
     RBNode * cur_node = this;
     RBNode * uncle = this;
 
-    while(Color::RED == cur_node->parent->color)
+    while(RED == cur_node->parent->color)
     {
         if(cur_node->parent == cur_node->parent->parent->left)
         {
             uncle = cur_node->parent->parent->right;
 
-            if(Color::RED == uncle->color)
+            if(RED == uncle->color)
             {
-                uncle->color = Color::BLACK;
-                cur_node->parent->color = Color::BLACK;
-                cur_node->parent->parent->color = Color::RED;
+                uncle->color = BLACK;
+                cur_node->parent->color = BLACK;
+                cur_node->parent->parent->color = RED;
 
                 cur_node = cur_node->parent->parent;
             }
@@ -52,8 +52,8 @@ void RBNode::insert_fixup(RBTree *rbt)
                     cur_node->left_rotate_node(rbt);
                 }
 
-                cur_node->parent->color = Color::BLACK;
-                cur_node->parent->parent->color = Color::RED;
+                cur_node->parent->color = BLACK;
+                cur_node->parent->parent->color = RED;
 
                 cur_node->parent->parent->right_rotate_node(rbt);
             }
@@ -62,11 +62,11 @@ void RBNode::insert_fixup(RBTree *rbt)
         {
             uncle = cur_node->parent->parent->left;
 
-            if(Color::RED == uncle->color)
+            if(RED == uncle->color)
             {
-                uncle->color = Color::BLACK;
-                cur_node->parent->color = Color::BLACK;
-                cur_node->parent->parent->color = Color::RED;
+                uncle->color = BLACK;
+                cur_node->parent->color = BLACK;
+                cur_node->parent->parent->color = RED;
 
                 cur_node = cur_node->parent->parent;
             }
@@ -78,8 +78,8 @@ void RBNode::insert_fixup(RBTree *rbt)
                     cur_node->right_rotate_node(rbt);
                 }
 
-                cur_node->parent->color = Color::BLACK;
-                cur_node->parent->parent->color = Color::RED;
+                cur_node->parent->color = BLACK;
+                cur_node->parent->parent->color = RED;
 
                 cur_node->parent->parent->left_rotate_node(rbt);
             }

@@ -4,24 +4,24 @@
 Node::Node()
 {
     this->data = 0;
-    this->left = nullptr;
-    this->right = nullptr;
-    this->parent = nullptr;
+    this->left = NULL;
+    this->right = NULL;
+    this->parent = NULL;
 }
 
 Node::Node(int data)
 {
     this->data = data;
-    this->left = nullptr;
-    this->right = nullptr;
-    this->parent = nullptr;
+    this->left = NULL;
+    this->right = NULL;
+    this->parent = NULL;
 }
 
 void Node::insert_node(Tree *t)
 {
     Node *cur_node = t->get_root();
     Node *prev_node;
-    while(nullptr != cur_node)
+    while(NULL != cur_node)
     {
         prev_node = cur_node;
         if(this->data < cur_node->data)
@@ -35,7 +35,7 @@ void Node::insert_node(Tree *t)
     }
 
 
-    if(nullptr == t->get_root())
+    if(NULL == t->get_root())
     {
         cur_node = this;
         t->set_root(cur_node);
@@ -60,33 +60,33 @@ void Node::delete_node(Tree *t)
     Node *match_node = this;
     Node *cur_node = this;
 
-    if(nullptr == cur_node->left &&
-            nullptr == cur_node->right)
+    if(NULL == cur_node->left &&
+            NULL == cur_node->right)
     {
         if(cur_node == cur_node->parent->left)
         {
-            cur_node->parent->left = nullptr;
+            cur_node->parent->left = NULL;
         }
         else
         {
-            cur_node->parent->right = nullptr;
+            cur_node->parent->right = NULL;
         }
 
         if(t->get_root() == cur_node)
         {
             delete(cur_node);
-            t->set_root(nullptr);
+            t->set_root(NULL);
         }
         else
         {
             delete(cur_node);
-            cur_node = nullptr;
+            cur_node = NULL;
         }
     }
-    else if(nullptr == cur_node->left)
+    else if(NULL == cur_node->left)
     {
         cur_node->right->parent = prev_node;
-        if(nullptr != prev_node)
+        if(NULL != prev_node)
         {
             if(cur_node == prev_node->left)
             {
@@ -104,10 +104,10 @@ void Node::delete_node(Tree *t)
             delete(cur_node);
         }
     }
-    else if(nullptr == cur_node->right)
+    else if(NULL == cur_node->right)
     {
         cur_node->left->parent = prev_node;
-        if(nullptr != prev_node)
+        if(NULL != prev_node)
         {
             if(cur_node == prev_node->left)
             {
@@ -129,7 +129,7 @@ void Node::delete_node(Tree *t)
     {
         prev_node = cur_node;
         cur_node = cur_node->left;
-        while(nullptr != cur_node)
+        while(NULL != cur_node)
         {
             prev_node = cur_node;
             cur_node = cur_node->right;
@@ -144,12 +144,12 @@ void Node::delete_node(Tree *t)
         {
             prev_node->parent->right = prev_node->left;
         }
-        if(nullptr != prev_node->left)
+        if(NULL != prev_node->left)
         {
             prev_node->left->parent = prev_node->parent;
         }
         delete(prev_node);
-        prev_node = nullptr;
+        prev_node = NULL;
     }
 }
 
@@ -157,7 +157,7 @@ Node * Node::find_node(int data)
 {
     Node *cur_node = this;
 
-    while(nullptr != cur_node)
+    while(NULL != cur_node)
     {
         if(data == cur_node->data)
         {
@@ -182,7 +182,7 @@ void Node::left_rotate_node(Tree *t)
     Node * new_parent = cur_node->right;
     cur_node->right = new_parent->left;
 
-    if(nullptr != new_parent->left)
+    if(NULL != new_parent->left)
     {
         new_parent->left->parent = cur_node;
     }
@@ -232,13 +232,13 @@ void Node::right_rotate_node(Tree *t)
 
 void Node::print_node(ofstream &file)
 {
-    if(nullptr != this->left)
+    if(NULL != this->left)
     {
         file<<"     "<<this->data<<" -> "<<this->left->data<<";\n";
         file<<"     "<<this->left->data<<" -> "<<this->data<<" [style=dotted,color=red];\n";
         this->left->print_node(file);
     }
-    if(nullptr != this->right)
+    if(NULL != this->right)
     {
         file<<"     "<<this->data<<" -> "<<this->right->data<<";\n";
         file<<"     "<<this->right->data<<" -> "<<this->data<<" [style=dotted,colr=red];\n";

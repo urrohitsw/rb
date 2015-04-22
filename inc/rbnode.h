@@ -5,7 +5,7 @@
 #include "node.h"
 #include "rbtree.h"
 
-enum class Color
+enum Color
 {
     RED,
     BLACK

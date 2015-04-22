@@ -22,7 +22,7 @@ ifeq ($(ENABLE_GRAPH_OPERATIONS), true)
 DEFS += -DENABLE_GRAPH_OPERATIONS
 endif
 
-DEFS += -std=c++11
+#DEFS += -std=c++11
 
 all : init $(BIN_DIR)/$(BIN)
 

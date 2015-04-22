@@ -13,7 +13,7 @@ void Tree::set_root(Node * root_node)
 
 Tree::Tree()
 {
-    root = nullptr;
+    root = NULL;
 
     /* initialize random seed: */
     srand (time(NULL));
@@ -61,6 +61,7 @@ void Tree::insert_into_tree()
     int failure_count = 0;
     int input_data;
     Node * input_node;
+    list<int>::iterator result;
 
     cout<<"Enter number of entries:";
     cin>>entry_count;
@@ -69,9 +70,9 @@ void Tree::insert_into_tree()
     {
         input_data = rand()%100 + 1;
 
-        auto result = find(treedata.begin(), treedata.end(), input_data);
+         result = find(treedata.begin(), treedata.end(), input_data);
 
-        if(result != end(treedata))
+        if(result != treedata.end())
         {
             cout<<"Tree already contains "<<input_data<<endl;
             failure_count++;

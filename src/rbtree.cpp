@@ -12,6 +12,7 @@ void RBTree::insert_into_tree()
     int failure_count = 0;
     int input_data;
     RBNode * input_node;
+    list<int>::iterator result;
 
     cout<<"Enter number of entries:";
     cin>>entry_count;
@@ -20,9 +21,9 @@ void RBTree::insert_into_tree()
     {
         input_data = rand()%100 + 1;
 
-        auto result = find(treedata.begin(), treedata.end(), input_data);
+        result = find(treedata.begin(), treedata.end(), input_data);
 
-        if(result != end(treedata))
+        if(result != treedata.end())
         {
             cout<<"Tree already contains "<<input_data<<endl;
             failure_count++;
@@ -32,7 +33,7 @@ void RBTree::insert_into_tree()
             cout<<"Adding "<<input_data<<endl;
             treedata.push_back(input_data);
 
-            input_node = new RBNode(input_data,Color::RED);
+            input_node = new RBNode(input_data,RED);
             input_node->insert_node(this);
             input_node->insert_fixup(this);
             print_tree();

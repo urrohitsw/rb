@@ -29,7 +29,7 @@ int main()
 
         switch(static_cast<Operations>(choice))
         {
-            case Operations::INSERT:
+            case INSERT:
 #ifndef ENABLE_RANDOM_OPERATIONS
                 cout<<"Enter the data to be inserted: ";
                 cin>>input_data;
@@ -49,7 +49,7 @@ int main()
 #endif
 #endif
                 break;
-            case Operations::DELETE:
+            case DELETE:
 #if 0
 #ifndef ENABLE_RANDOM_OPERATIONS
                 cout<<"Enter the data to be deleted: ";
@@ -68,7 +68,7 @@ int main()
 #endif
 #endif
                 break;
-            case Operations::LEFT_ROTATE:
+            case LEFT_ROTATE:
 #if 0
 #ifndef ENABLE_RANDOM_OPERATIONS
                 cout<<"Enter the data to be rotated to the left: ";
@@ -87,7 +87,7 @@ int main()
 #endif
 #endif
                 break;
-            case Operations::RIGHT_ROTATE:
+            case RIGHT_ROTATE:
 #if 0
 #ifndef ENABLE_RANDOM_OPERATIONS
                 cout<<"Enter the data to be rotated to the right: ";
@@ -106,10 +106,10 @@ int main()
 #endif
 #endif
                 break;
-            case Operations::PRINT:
+            case PRINT:
                 //bst.print_tree();
                 break;
-            case Operations::EXIT:
+            case EXIT:
                 exit(0);
             default:
                 cout<<"More cases coming soon"<<endl;
