@@ -4,7 +4,6 @@
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
-#include "tree.h"
 
 using namespace std;
 

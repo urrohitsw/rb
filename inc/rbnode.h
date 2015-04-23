@@ -3,13 +3,14 @@
 
 #include <iostream>
 #include "node.h"
-#include "rbtree.h"
 
 enum Color
 {
     RED,
     BLACK
 };
+
+class RBTree;
 
 class RBNode: public Node
 {

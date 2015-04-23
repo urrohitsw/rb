@@ -22,11 +22,11 @@ class Tree
         /*
          * Getter function.
          * */
-        Node * get_root();
+        virtual Node * get_root();
         /*
          * Setter function.
          * */
-        void set_root(Node *root_node);
+        virtual void set_root(Node *root_node);
         /*
          * Used for random insertions in tree.
          * */

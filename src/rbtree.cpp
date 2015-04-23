@@ -3,7 +3,17 @@
 
 RBTree::RBTree():Tree()
 {
+    root = NULL;
+}
 
+RBNode * RBTree::get_root()
+{
+    return root;
+}
+
+void RBTree::set_root(RBNode *root_node)
+{
+    root = root_node;
 }
 
 void RBTree::insert_into_tree()

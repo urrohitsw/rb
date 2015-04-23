@@ -30,7 +30,7 @@ void RBNode::insert_fixup(RBTree *rbt)
     RBNode * cur_node = this;
     RBNode * uncle = this;
 
-    while(RED == cur_node->parent->color)
+    while(NULL != cur_node->parent && RED == cur_node->parent->color)
     {
         if(cur_node->parent == cur_node->parent->parent->left)
         {
@@ -85,4 +85,5 @@ void RBNode::insert_fixup(RBTree *rbt)
             }
         }
     }
+    rbt->root->color = BLACK;
 }
