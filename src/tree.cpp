@@ -3,11 +3,13 @@
 
 Node * Tree::get_root()
 {
+    cout<<"bst get";
     return root;
 }
 
 void Tree::set_root(Node * root_node)
 {
+    cout<<"bst set";
     root = root_node;
 }
 
@@ -15,7 +17,7 @@ Tree::Tree()
 {
     root = NULL;
 
-    /* initialize random seed: */
+    /* initialize random seed */
     srand (time(NULL));
 }
 

@@ -107,7 +107,7 @@ int main()
 #endif
                 break;
             case PRINT:
-                //bst.print_tree();
+                rbt.print_tree();
                 break;
             case EXIT:
                 exit(0);

@@ -45,6 +45,7 @@ void RBTree::insert_into_tree()
 
             input_node = new RBNode(input_data,RED);
             input_node->insert_node(this);
+            print_tree();
             input_node->insert_fixup(this);
             print_tree();
         }
@@ -53,4 +54,18 @@ void RBTree::insert_into_tree()
 
     cout<<"Added "<<entry_count - failure_count
         <<" entries to the BST."<<endl;
+}
+
+void RBTree::print_tree()
+{
+#ifdef ENABLE_GRAPH_OPERATIONS
+    ofstream file;
+    file.open("tree.gv",ios::app);
+    file<<"digraph BST {"<<endl;
+#endif
+    root->print_node(file);
+#ifdef ENABLE_GRAPH_OPERATIONS
+    file<<"}";
+    file.close();
+#endif
 }

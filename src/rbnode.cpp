@@ -25,6 +25,43 @@ RBNode::RBNode(int data,Color color):Node(data)
     this->parent = NULL;
 }
 
+void RBNode::insert_node(RBTree *t)
+{
+    RBNode *cur_node = t->get_root();
+    RBNode *prev_node;
+    while(NULL != cur_node)
+    {
+        prev_node = cur_node;
+        if(this->data < cur_node->data)
+        {
+            cur_node = cur_node->left;
+        }
+        else
+        {
+            cur_node = cur_node->right;
+        }
+    }
+
+
+    if(NULL == t->get_root())
+    {
+        cur_node = this;
+        t->set_root(cur_node);
+    }
+    else
+    {
+        if(this->data < prev_node->data)
+        {
+            prev_node->left = this;
+        }
+        else
+        {
+            prev_node->right = this;
+        }
+        this->parent = prev_node;
+    }
+}
+
 void RBNode::insert_fixup(RBTree *rbt)
 {
     RBNode * cur_node = this;
@@ -36,7 +73,7 @@ void RBNode::insert_fixup(RBTree *rbt)
         {
             uncle = cur_node->parent->parent->right;
 
-            if(RED == uncle->color)
+            if(NULL != uncle && RED == uncle->color)
             {
                 uncle->color = BLACK;
                 cur_node->parent->color = BLACK;
@@ -62,7 +99,7 @@ void RBNode::insert_fixup(RBTree *rbt)
         {
             uncle = cur_node->parent->parent->left;
 
-            if(RED == uncle->color)
+            if(NULL != uncle && RED == uncle->color)
             {
                 uncle->color = BLACK;
                 cur_node->parent->color = BLACK;
@@ -86,4 +123,88 @@ void RBNode::insert_fixup(RBTree *rbt)
         }
     }
     rbt->root->color = BLACK;
+}
+
+void RBNode::print_node(ofstream &file)
+{
+    if(RED == this->color)
+    {
+        file<<"     "<<this->data<<" [color=red];\n";
+    }
+    else
+    {
+        file<<"     "<<this->data<<" [color=black];\n";
+    }
+    if(NULL != this->left)
+    {
+        file<<"     "<<this->data<<" -> "<<this->left->data<<";\n";
+        file<<"     "<<this->left->data<<" -> "<<this->data<<" [style=dotted,color=red];\n";
+        this->left->print_node(file);
+    }
+    if(NULL != this->right)
+    {
+        file<<"     "<<this->data<<" -> "<<this->right->data<<";\n";
+        file<<"     "<<this->right->data<<" -> "<<this->data<<" [style=dotted,colr=red];\n";
+        this->right->print_node(file);
+    }
+
+}
+
+void RBNode::left_rotate_node(RBTree *t)
+{
+    RBNode *cur_node = this;
+
+    RBNode * new_parent = cur_node->right;
+    cur_node->right = new_parent->left;
+
+    if(NULL != new_parent->left)
+    {
+        new_parent->left->parent = cur_node;
+    }
+    new_parent->parent = cur_node->parent;
+
+    if(t->get_root() == cur_node)
+    {
+        t->set_root(new_parent);
+    }
+    else if(cur_node == cur_node->parent->left)
+    {
+        cur_node->parent->left = new_parent;
+    }
+    else
+    {
+        cur_node->parent->right = new_parent;
+    }
+    new_parent->left = cur_node;
+    cur_node->parent = new_parent;
+}
+
+void RBNode::right_rotate_node(RBTree *t)
+{
+    RBNode *cur_node = this;
+
+    RBNode * new_parent = cur_node->left;
+    cur_node->left = new_parent->right;
+
+    if(NULL != new_parent->right)
+    {
+        new_parent->right->parent = cur_node;
+    }
+    new_parent->parent = cur_node->parent;
+
+    if(t->get_root() == cur_node)
+    {
+        t->set_root(new_parent);
+    }
+    else if(cur_node == cur_node->parent->left)
+    {
+        cur_node->parent->left = new_parent;
+    }
+    else
+    {
+        cur_node->parent->right = new_parent;
+    }
+
+    new_parent->right = cur_node;
+    cur_node->parent = new_parent;
 }

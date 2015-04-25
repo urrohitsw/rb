@@ -24,8 +24,11 @@ class RBNode: public Node
         RBNode();
         RBNode(int data);
         RBNode(int data,Color color);
+        void insert_node(RBTree *rbt);
         void insert_fixup(RBTree *rbt);
         //void delete_fixup(Tree *t);
-        //void print_node();
+        void print_node(ofstream &file);
+        void left_rotate_node(RBTree *rbt);
+        void right_rotate_node(RBTree *rbt);
 };
 #endif

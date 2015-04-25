@@ -38,7 +38,7 @@ class Tree
         /*
          * Test functon for writing the tree data to a file.
          * */
-        void print_tree();
+        virtual void print_tree();
 };
 
 enum Operations

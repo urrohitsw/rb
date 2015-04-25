@@ -11,7 +11,7 @@ CPP_FLAGS = -Wall  -g $(DEFS)
 HEADER_FILES = tree.h node.h rbnode.h rbtree.h
 HEADERS = $(patsubst %,$(INC_DIR)/%,$(HEADER_FILES))
 
-OBJECT_FILES = tree.o node.o rbnode.o rbtree.o main.o
+OBJECT_FILES = tree.o node.o rbtree.o rbnode.o main.o
 OBJECTS = $(patsubst %,$(OBJ_DIR)/%,$(OBJECT_FILES))
 
 ifeq ($(ENABLE_RANDOM_OPERATIONS), true)
