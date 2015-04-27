@@ -1,7 +1,7 @@
 #ifndef RB_TREE_H
 #define RB_TREE_H
 #include <iostream>
-#include "tree.h"
+#include "rbtree.h"
 #include "rbnode.h"
 
 using namespace std;

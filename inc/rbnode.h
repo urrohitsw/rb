@@ -12,7 +12,7 @@ enum Color
 
 class RBTree;
 
-class RBNode: public Node
+class RBNode
 {
     protected:
         /* TODO Try to use Nodes pointers */
@@ -24,11 +24,11 @@ class RBNode: public Node
         RBNode();
         RBNode(int data);
         RBNode(int data,Color color);
-        void insert_node(RBTree *rbt);
+        //void insert_node(RBTree *rbt);
         void insert_fixup(RBTree *rbt);
         //void delete_fixup(Tree *t);
         void print_node(ofstream &file);
-        void left_rotate_node(RBTree *rbt);
-        void right_rotate_node(RBTree *rbt);
+        //void left_rotate_node(RBTree *rbt);
+        //void right_rotate_node(RBTree *rbt);
 };
 #endif

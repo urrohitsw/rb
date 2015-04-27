@@ -1,19 +1,19 @@
-#include"tree.h"
-#include"node.h"
+#include"bstree.h"
+#include"bsnode.h"
 
-Node * Tree::get_root()
+BSNode * BSTree::get_root()
 {
     cout<<"bst get";
     return root;
 }
 
-void Tree::set_root(Node * root_node)
+void BSTree::set_root(BSNode * root_node)
 {
     cout<<"bst set";
     root = root_node;
 }
 
-Tree::Tree()
+BSTree::BSTree()
 {
     root = NULL;
 
@@ -21,7 +21,7 @@ Tree::Tree()
     srand (time(NULL));
 }
 
-void Tree::print_tree()
+void BSTree::print_tree()
 {
 #ifdef ENABLE_GRAPH_OPERATIONS
     ofstream file;
@@ -35,7 +35,7 @@ void Tree::print_tree()
 #endif
 }
 
-void Tree::delete_from_tree()
+void BSTree::delete_from_tree()
 {
     int entry_count;
 
@@ -51,18 +51,18 @@ void Tree::delete_from_tree()
         treedata.pop_front();
         cout<<"Deleting "<<delete_data<<endl;
 
-        root->find_node(delete_data)->delete_node(this);
+        root->find_node(this, delete_data)->delete_node(this);
         print_tree();
     }
     cout<<"Deleted "<<entry_count<<" entries from the BST."<<endl;
 }
 
-void Tree::insert_into_tree()
+void BSTree::insert_into_tree()
 {
     int entry_count;
     int failure_count = 0;
     int input_data;
-    Node * input_node;
+    BSNode * input_node;
     list<int>::iterator result;
 
     cout<<"Enter number of entries:";
@@ -76,7 +76,7 @@ void Tree::insert_into_tree()
 
         if(result != treedata.end())
         {
-            cout<<"Tree already contains "<<input_data<<endl;
+            cout<<"BSTree already contains "<<input_data<<endl;
             failure_count++;
         }
         else
@@ -84,8 +84,8 @@ void Tree::insert_into_tree()
             cout<<"Adding "<<input_data<<endl;
             treedata.push_back(input_data);
 
-            input_node = new Node(input_data);
-            input_node->insert_node(this);
+            input_node = new BSNode(input_data);
+            input_node->insert_node(input_node, this);
             print_tree();
         }
 

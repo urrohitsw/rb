@@ -1,4 +1,4 @@
-#include "tree.h"
+#include "bstree.h"
 #include "rbtree.h"
 #include "rbnode.h"
 

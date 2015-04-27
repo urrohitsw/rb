@@ -25,6 +25,7 @@ RBNode::RBNode(int data,Color color):Node(data)
     this->parent = NULL;
 }
 
+#if 0
 void RBNode::insert_node(RBTree *t)
 {
     RBNode *cur_node = t->get_root();
@@ -61,6 +62,7 @@ void RBNode::insert_node(RBTree *t)
         this->parent = prev_node;
     }
 }
+#endif
 
 void RBNode::insert_fixup(RBTree *rbt)
 {
@@ -150,6 +152,7 @@ void RBNode::print_node(ofstream &file)
 
 }
 
+#if 0
 void RBNode::left_rotate_node(RBTree *t)
 {
     RBNode *cur_node = this;
@@ -208,3 +211,4 @@ void RBNode::right_rotate_node(RBTree *t)
     new_parent->right = cur_node;
     cur_node->parent = new_parent;
 }
+#endif

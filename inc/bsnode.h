@@ -1,32 +1,32 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef BSNODE_H
+#define BSNODE_H
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
+#include "inode.h"
 
 using namespace std;
 
-class Tree;
-
-class Node
+class BSNode:public INode
 {
     protected:
         int data;
-        Node *left;
-        Node *right;
-        Node *parent;
+        BSNode *left;
+        BSNode *right;
+        BSNode *parent;
     public:
-        Node();
-        Node(int data);
+        BSNode();
+        BSNode(int data);
         /*
          * Function for printing a nodes's data.
          * */
         void print_node(ofstream &file);
+#if 0
         /*
          * Finding the node in the tree given the data.
          * */
-        Node * find_node(int data);
+        BSNode * find_node(int data);
         /*
          * Function for inserting a node in Tree.
          * */
@@ -43,6 +43,7 @@ class Node
          * Delete the calling node
          * */
         void delete_node(Tree *t);
+#endif
 };
 
 #endif

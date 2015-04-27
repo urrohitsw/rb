@@ -1,7 +1,7 @@
-#include"tree.h"
-#include"node.h"
+#include"bstree.h"
+#include"rbnode.h"
 
-Node::Node()
+BSNode::BSNode()
 {
     this->data = 0;
     this->left = NULL;
@@ -9,7 +9,7 @@ Node::Node()
     this->parent = NULL;
 }
 
-Node::Node(int data)
+BSNode::BSNode(int data)
 {
     this->data = data;
     this->left = NULL;
@@ -17,10 +17,11 @@ Node::Node(int data)
     this->parent = NULL;
 }
 
-void Node::insert_node(Tree *t)
+#if 0
+void BSNode::insert_node(Tree *t)
 {
-    Node *cur_node = t->get_root();
-    Node *prev_node;
+    BSNode *cur_node = t->get_root();
+    BSNode *prev_node;
     while(NULL != cur_node)
     {
         prev_node = cur_node;
@@ -54,11 +55,11 @@ void Node::insert_node(Tree *t)
     }
 }
 
-void Node::delete_node(Tree *t)
+void BSNode::delete_node(Tree *t)
 {
-    Node *prev_node = this->parent;
-    Node *match_node = this;
-    Node *cur_node = this;
+    BSNode *prev_node = this->parent;
+    BSNode *match_node = this;
+    BSNode *cur_node = this;
 
     if(NULL == cur_node->left &&
             NULL == cur_node->right)
@@ -153,9 +154,9 @@ void Node::delete_node(Tree *t)
     }
 }
 
-Node * Node::find_node(int data)
+BSNode * BSNode::find_node(int data)
 {
-    Node *cur_node = this;
+    BSNode *cur_node = this;
 
     while(NULL != cur_node)
     {
@@ -175,11 +176,11 @@ Node * Node::find_node(int data)
     return cur_node;
 }
 
-void Node::left_rotate_node(Tree *t)
+void BSNode::left_rotate_node(Tree *t)
 {
-    Node *cur_node = this;
+    BSNode *cur_node = this;
 
-    Node * new_parent = cur_node->right;
+    BSNode * new_parent = cur_node->right;
     cur_node->right = new_parent->left;
 
     if(NULL != new_parent->left)
@@ -204,11 +205,11 @@ void Node::left_rotate_node(Tree *t)
     cur_node->parent = new_parent;
 }
 
-void Node::right_rotate_node(Tree *t)
+void BSNode::right_rotate_node(Tree *t)
 {
-    Node *cur_node = this;
+    BSNode *cur_node = this;
 
-    Node * new_parent = cur_node->left;
+    BSNode * new_parent = cur_node->left;
     cur_node->parent = new_parent;
 
     cur_node->left = new_parent->right;
@@ -229,8 +230,9 @@ void Node::right_rotate_node(Tree *t)
     new_parent->right = cur_node;
     cur_node->parent = new_parent;
 }
+#endif
 
-void Node::print_node(ofstream &file)
+void BSNode::print_node(ofstream &file)
 {
     if(NULL != this->left)
     {

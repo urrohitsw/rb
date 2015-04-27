@@ -6,27 +6,27 @@
 #include <list>
 #include <time.h>
 #include <algorithm>
-#include "node.h"
+#include "bsnode.h"
 
 using namespace std;
 
-class Node;
+class BSNode;
 
-class Tree
+class BSTree
 {
     protected:
-        Node * root;
+        BSNode * root;
         list<int> treedata;
     public:
-        Tree();
+        BSTree();
         /*
          * Getter function.
          * */
-        virtual Node * get_root();
+        virtual BSNode * get_root();
         /*
          * Setter function.
          * */
-        virtual void set_root(Node *root_node);
+        virtual void set_root(BSNode *root_node);
         /*
          * Used for random insertions in tree.
          * */
