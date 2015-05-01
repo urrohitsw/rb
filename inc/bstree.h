@@ -22,11 +22,11 @@ class BSTree
         /*
          * Getter function.
          * */
-        virtual BSNode * get_root();
+        BSNode * get_root();
         /*
          * Setter function.
          * */
-        virtual void set_root(BSNode *root_node);
+        void set_root(BSNode *root_node);
         /*
          * Used for random insertions in tree.
          * */
@@ -38,7 +38,7 @@ class BSTree
         /*
          * Test functon for writing the tree data to a file.
          * */
-        virtual void print_tree();
+        void print_tree();
 };
 
 enum Operations

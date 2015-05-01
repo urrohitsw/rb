@@ -3,12 +3,12 @@
 
 class INode
 {
-#if 1
+    public:
     /*
      * Finding the node in the tree given the data.
      * */
     template <class Node>
-        Node * find_node(int data);
+        Node * find_node(Node * cur_node,int data);
     /*
      * Function for inserting a node in Tree.
      * */
@@ -29,6 +29,5 @@ class INode
      * */
     template <class Node, class Tree>
         void delete_node(Node* cur_node, Tree *t);
-#endif
 };
 #endif

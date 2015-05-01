@@ -1,7 +1,8 @@
 #include "rbtree.h"
 #include "rbnode.h"
+#include "inode.cpp"
 
-RBTree::RBTree():Tree()
+RBTree::RBTree():BSTree()
 {
     root = NULL;
 }
@@ -23,6 +24,7 @@ void RBTree::insert_into_tree()
     int input_data;
     RBNode * input_node;
     list<int>::iterator result;
+    INode friend_node;
 
     cout<<"Enter number of entries:";
     cin>>entry_count;
@@ -44,7 +46,7 @@ void RBTree::insert_into_tree()
             treedata.push_back(input_data);
 
             input_node = new RBNode(input_data,RED);
-            input_node->insert_node(this);
+            friend_node.insert_node(input_node, this);
             print_tree();
             input_node->insert_fixup(this);
             print_tree();

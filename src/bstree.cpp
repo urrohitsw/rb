@@ -1,15 +1,14 @@
-#include"bstree.h"
-#include"bsnode.h"
+#include "bstree.h"
+#include "bsnode.h"
+#include "inode.cpp"
 
 BSNode * BSTree::get_root()
 {
-    cout<<"bst get";
     return root;
 }
 
 void BSTree::set_root(BSNode * root_node)
 {
-    cout<<"bst set";
     root = root_node;
 }
 
@@ -43,6 +42,8 @@ void BSTree::delete_from_tree()
     cin>>entry_count;
 
     int delete_data;
+    BSNode *temp_node;
+    INode friend_node;
 
     for(int index = 0;index < entry_count; index++)
     {
@@ -51,7 +52,8 @@ void BSTree::delete_from_tree()
         treedata.pop_front();
         cout<<"Deleting "<<delete_data<<endl;
 
-        root->find_node(this, delete_data)->delete_node(this);
+        temp_node = friend_node.find_node(root, delete_data);
+        friend_node.delete_node(temp_node, this);
         print_tree();
     }
     cout<<"Deleted "<<entry_count<<" entries from the BST."<<endl;
@@ -64,6 +66,7 @@ void BSTree::insert_into_tree()
     int input_data;
     BSNode * input_node;
     list<int>::iterator result;
+    INode friend_node;
 
     cout<<"Enter number of entries:";
     cin>>entry_count;
@@ -85,7 +88,7 @@ void BSTree::insert_into_tree()
             treedata.push_back(input_data);
 
             input_node = new BSNode(input_data);
-            input_node->insert_node(input_node, this);
+            friend_node.insert_node(input_node, this);
             print_tree();
         }
 

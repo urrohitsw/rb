@@ -2,7 +2,9 @@
 #define RB_NODE_H
 
 #include <iostream>
-#include "node.h"
+#include "inode.h"
+
+using namespace std;
 
 enum Color
 {
@@ -16,6 +18,7 @@ class RBNode
 {
     protected:
         /* TODO Try to use Nodes pointers */
+        int data;
         RBNode *left;
         RBNode *right;
         RBNode *parent;
@@ -24,6 +27,7 @@ class RBNode
         RBNode();
         RBNode(int data);
         RBNode(int data,Color color);
+        friend class INode;
         //void insert_node(RBTree *rbt);
         void insert_fixup(RBTree *rbt);
         //void delete_fixup(Tree *t);

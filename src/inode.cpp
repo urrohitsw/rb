@@ -1,6 +1,7 @@
 #include "inode.h"
 
-Node * Node::find_node(Node *cur_node, int data)
+template <class Node>
+Node * INode::find_node(Node *cur_node, int data)
 {
     while(NULL != cur_node)
     {
@@ -20,6 +21,7 @@ Node * Node::find_node(Node *cur_node, int data)
     return cur_node;
 }
 
+template <class Node, class Tree>
 void INode::insert_node(Node *new_node, Tree *t)
 {
     Node *cur_node = t->get_root();
@@ -56,6 +58,7 @@ void INode::insert_node(Node *new_node, Tree *t)
     }
 }
 
+template <class Node, class Tree>
 void INode::delete_node(Node *cur_node, Tree *t)
 {
     Node *prev_node = cur_node->parent;
@@ -154,6 +157,7 @@ void INode::delete_node(Node *cur_node, Tree *t)
     }
 }
 
+template <class Node, class Tree>
 void INode::left_rotate_node(Node* cur_node, Tree* t)
 {
     Node * new_parent = cur_node->right;
@@ -181,6 +185,7 @@ void INode::left_rotate_node(Node* cur_node, Tree* t)
     cur_node->parent = new_parent;
 }
 
+template <class Node, class Tree>
 void INode::right_rotate_node(Node *cur_node, Tree *t)
 {
     Node * new_parent = cur_node->left;
