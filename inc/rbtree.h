@@ -16,6 +16,7 @@ class RBTree: public BSTree
         void set_root(RBNode *root_node);
         void insert_into_tree();
         void print_tree();
+        /* Failed to visualize RB deletion. Help appreciated. */
         //void delete_from_tree();
 };
 #endif
