@@ -1,5 +1,5 @@
-#ifndef INODE_H
-#define INODE_H
+#ifndef _INODE_H_
+#define _INODE_H_
 
 class INode
 {
